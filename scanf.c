@@ -5,12 +5,12 @@ void main() {
 
     printf("How many siblings do you have? ");
     scanf("%d", &sib);
-    getchar();
     
     printf("How many children do you have? ");
     scanf("%d", &children);
-    getchar();
 
-    printf("You have %d siblings and %d children.", sib, children);
+    printf("You have %d siblings and %d children.\n", sib, children);
+
+    fflush(stdin);
     getchar();
 }
