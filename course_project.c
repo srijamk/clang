@@ -3,7 +3,7 @@
 int main()
 {
   char title[100], artist[50];
-  char album_or_single;
+  char album_or_single = 'x';
   int num_tracks, is_album;
   float price;
 
@@ -22,9 +22,14 @@ int main()
   scanf("%d", &num_tracks);
   getchar();
 
-  printf("If your CD is an album, type 'A'. Otherwise, type 'S'. ");
-  scanf("%c", &album_or_single);
-  getchar();
+  while (album_or_single != 'A' && album_or_single != 'S')
+  {
+    printf("If your CD is an album, type 'A'. Otherwise, type 'S'. ");
+    scanf("%c", &album_or_single);
+    getchar();
+    if (album_or_single != 'A' && album_or_single != 'S')
+      printf("Please type a valid response.\n");
+  }
 
   printf("Type in the price of your CD: ");
   scanf("%f", &price);
