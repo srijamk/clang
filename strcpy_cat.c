@@ -24,5 +24,4 @@ int main() {
 
   printf("The full name is %s.\n", cat);
 
-
 }
