@@ -41,10 +41,7 @@ int main()
     printf("\nCD Details:\n============================\nTitle: %s\nArtist: %s\nNumber of Tracks: %d\n", title, artist, num_tracks);
 
     is_album = album_or_single == 'a' || album_or_single == 'A';
-    if (is_album)
-      printf("Type: Album\nPrice: %.2f\n============================\n", price);
-    else
-      printf("Type: Single\nPrice: %.2f\n============================\n", price);
+    (is_album) ? printf("Type: Album\nPrice: %.2f\n============================\n", price) : printf("Type: Single\nPrice: %.2f\n============================\n", price);
 
     getchar();
 
@@ -52,14 +49,9 @@ int main()
     scanf("%c", &another_cd);
     getchar();
 
-    if (another_cd != 'n' && another_cd != 'N') {
-      if (num_cds < 3) {
-        ++num_cds;
-      } else {
-        printf("You have already entered details for 3 CDs.\n");
-        break;
-      }
-    }
+    if (another_cd != 'n' && another_cd != 'N') 
+      (num_cds < 3) ? ++num_cds : printf("You have already entered details for 3 CDs.\n");
+    
   }
 
   printf("Goodbye!\n");
