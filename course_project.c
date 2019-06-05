@@ -1,8 +1,11 @@
 #include <stdio.h>
+#define MAX_TITLE_LENGTH  100
+#define MAX_ARTIST_LENGTH 50
+#define MAX_CDS 3
 
 int main()
 {
-  char title[100], artist[50];
+  char title[MAX_TITLE_LENGTH], artist[MAX_ARTIST_LENGTH];
   char album_or_single, another_cd = 'x';
   int num_tracks, is_album;
   int num_cds = 1;
@@ -50,7 +53,7 @@ int main()
     getchar();
 
     if (another_cd != 'n' && another_cd != 'N') 
-      (num_cds < 3) ? ++num_cds : printf("You have already entered details for 3 CDs.\n");
+      (num_cds < MAX_CDS) ? ++num_cds : printf("You have already entered details for %d CDs.\n", MAX_CDS);
     
   }
 
