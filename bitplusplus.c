@@ -3,17 +3,17 @@
 int main()
 {
   int n;
-  int x = 0;
+  int add = 0;
+  int sub = 0;
   scanf("%d", &n);
   char line[3];
   for (int i = 0; i < n; i++)
   {
     scanf("%s", line);
     if (line[0] == '+' || line[2] == '+')
-      x = x + 1;
+      add++;
     else
-      x = x - 1;
+      sub++;
   }
-
-  printf("%d\n", x);
+  printf("%d\n", add - sub);
 }
