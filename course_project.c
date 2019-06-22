@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX_TITLE_LENGTH 100
 #define MAX_ARTIST_LENGTH 50
 #define MAX_CDS 3
