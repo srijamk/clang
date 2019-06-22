@@ -3,7 +3,7 @@
 #define BIT     (1 << 2)
 
 int main() {
-   int x = 5;
+    int     x = 5;
     
     printf("%d\n", x);
     // 00000101 | 00001000 = 00001101
