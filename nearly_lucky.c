@@ -1,28 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-int main()
-{
-  char num[20];
-  char result[3];
+int main() {
+    int result = 0;
+    char line[20];
+    scanf("%s", line);
 
-  scanf("%s", num);
-  for (int i = 0; i < strlen(num); i++)
-  {
-    if (num[i] != '4' && num[i] != '7')
-    {
-      result[0] = 'N';
-      result[1] = 'O';
-      break;
+    for (int i = 0; line[i] != '\0'; i++) {
+        result += ((line[i] == '4' || line[i] == '7') ? 1 : 0);
     }
-  }
-  if (result[0] != 'N')
-  {
-    result[0] = 'Y';
-    result[1] = 'E';
-    result[2] = 'S';
-  }
 
-  printf(result);
-  fflush(stdin);
+    printf((result == 4 || result == 7) ? "YES\n" : "NO\n");
 }
