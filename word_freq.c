@@ -10,7 +10,6 @@
 char buffer[BUFFER_SIZE];
 int bufp = 0;
 
-
 struct tnode {
     char *word;
     int freq;
