@@ -41,6 +41,7 @@ char getword(char *word, int lim) {
         }
     }
     *w = '\0';
+    printf(word);
     return word[0];
 }
 
