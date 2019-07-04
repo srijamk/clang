@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 
+int compare(const char *a, const char *b) {
+    if (*a > *b) {
+        return 1;
+    } else if (*b > *a) {
+        return -1;
+    }
+    return 0;
+}
+
 int main() {
     int length, num, j, k;
     scanf("%d", &length);
@@ -10,17 +19,10 @@ int main() {
 
     for (int i = 0; i < num; i++) {
         scanf("%s", name);
-        for (j = k = 0; j < length; j++) {
-            if (k == strlen(name)) {
-                printf("%d\n", j);
-                break;
-            }
-            if (word[j] == name[k]) {
-                k++;
-            }
-
+        qsort(name, strlen(name), sizeof(int), compare);
+        for (j = 0; j < length; j++) {
+            
         }
-        printf("%d\n", j);
     }
 
 }

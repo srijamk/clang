@@ -63,7 +63,6 @@ void ungetch(int c) {
 char getword(char *word, int lim) {
     int c, getch(void);
     void ungetch(int);
-    char *w = word;
 
     while (isspace(c = getch()) && c != '\n') {
        ;
@@ -73,19 +72,19 @@ char getword(char *word, int lim) {
         return EOF;
     }
     if (c != EOF)
-        *w++ = c;
+        *word++ = c;
     if (c != '_' && !isalpha(c)) {
-        *w = '\0';
+        *word = '\0';
         return c;
     }
 
-    for ( ; --lim > 0; w++) {
-        if ((*w = getch()) != '_' && !isalnum(*w)) {
-            ungetch(*w);
+    for ( ; --lim > 0; words++) {
+        if ((*word = getch()) != '_' && !isalnum(*word)) {
+            ungetch(*word);
             break;
         }
     }
-    *w = '\0';
+    *word = '\0';
     return word[0];
 }
 
