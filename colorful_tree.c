@@ -21,31 +21,32 @@ void treeprint(struct node **nodes) {
 }
 
 int main() {
-    struct node *nodes[MAX_SIZE] = {NULL};
+    struct node **nodes;
+    *nodes = (struct node *) calloc(MAX_SIZE, sizeof(struct node));
     int n, q, a, b, c, d, x, y, u, v;
     scanf("%d %d", &n, &q);
 
     for (int i = 0; i < n - 1; i++) {
         scanf("%d %d %d %d", &a, &b, &c, &d);
-
+    
         if (nodes[a] == NULL) {
             nodes[a] = talloc();
-            
+            printf("made it\n");
             (nodes[a] -> number) = a;
             printf("%d\n", nodes[a] -> number);
-            //(nodes[a] -> cur) = 0;
-            //(nodes[a] -> color)[nodes[a] -> cur] = c;
-            //(nodes[a] -> dist)[nodes[a] -> cur] = d;
-            //(nodes[a] -> cur)++;
+            (nodes[a] -> cur) = 0;
+            (nodes[a] -> color)[nodes[a] -> cur] = c;
+            (nodes[a] -> dist)[nodes[a] -> cur] = d;
+            (nodes[a] -> cur)++;
         }
 
         if (nodes[b] == NULL) {
             nodes[b] = talloc();
-            //(nodes[b] -> number) = b;
-            //(nodes[b] -> cur) = 0;
-            //(nodes[b] -> color)[nodes[b] -> cur] = c;
-            //(nodes[b] -> dist)[nodes[b] -> cur] = d;
-            //(nodes[b] -> cur)++;
+            (nodes[b] -> number) = b;
+            (nodes[b] -> cur) = 0;
+            (nodes[b] -> color)[nodes[b] -> cur] = c;
+            (nodes[b] -> dist)[nodes[b] -> cur] = d;
+            (nodes[b] -> cur)++;
         }
 
         (nodes[a] -> neighbors)[nodes[a] -> cur - 1] = nodes[b];
