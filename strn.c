@@ -17,7 +17,7 @@ void strncat(char *s, char *t, int n) {
 }
 
 int strncmp(char *s, char *t, int n) {
-    while (n-- && *s++ && *t++) {
+    while (n-- && *s++ && *t++) { 
         if (*s < *t)
             return -1;
         else if (*s > *t)
