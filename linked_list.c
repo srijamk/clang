@@ -129,6 +129,7 @@ void frontBackSplit(struct node *source, struct node **frontPtr, struct node **b
     *backPtr = cur;
   }
 }
+<<<<<<< HEAD
 
 void removeDups(struct node *head)
 {
@@ -295,15 +296,141 @@ struct node* sortedIntersect(struct node* a, struct node* b) {
     return head;
 }
 
+=======
+
+void removeDups(struct node *head)
+{
+  struct node *cur = head;
+  int curData = (cur->data);
+  while ((cur->next) != NULL)
+  {
+    if (((cur->next)->data) == curData)
+      cur->next = (cur->next)->next;
+    else
+      cur = cur->next;
+    curData = cur->data;
+  }
+}
+
+int pop(struct node **headPtr)
+{
+  int headVal = (*headPtr)->data;
+  *headPtr = (*headPtr)->next;
+  return headVal;
+}
+
+void print(struct node *head)
+{
+  struct node *cur = head;
+  while ((cur->next) != NULL)
+  {
+    printf("%d ", cur->data);
+    cur = cur->next;
+  }
+
+  printf("%d\n", cur->data);
+}
+
+void moveNode(struct node **destPtr, struct node **sourcePtr)
+{
+  struct node *newNode = *sourcePtr; // new node set to list head
+  *sourcePtr = newNode->next;        // new head set to next
+  newNode->next = *destPtr;          // push new node to dest list
+  *destPtr = newNode;
+}
+
+void alternatingSplit(struct node *source, struct node **aPtr, struct node **bPtr)
+{
+  struct node *a = NULL;
+  struct node *b = NULL;
+
+  struct node *cur = source;
+  while (cur != NULL)
+  {
+    moveNode(&a, &cur);
+    if (cur != NULL)
+      moveNode(&b, &cur);
+  }
+  *aPtr = a;
+  *bPtr = b;
+}
+
+struct node *shuffleMerge(struct node *a, struct node *b)
+{
+  struct node *new = NULL;
+  struct node *aCur, *bCur = NULL;
+  aCur = a;
+  bCur = b;
+
+  while (!(aCur == NULL && bCur == NULL))
+  {
+    if (aCur != NULL)
+      moveNode(&new, &aCur);
+    if (bCur != NULL)
+      moveNode(&new, &bCur);
+  }
+
+  return new;
+}
+
+void addAtEnd(struct node *head, int newData)
+{
+  struct node *new = (struct node *)malloc(sizeof(struct node));
+  new->data = newData;
+  new->next = NULL;
+
+  struct node *cur = head;
+  while ((cur->next) != NULL)
+  {
+    cur = cur->next;
+  }
+  cur->next = new;
+}
+
+struct node *sortedMerge(struct node *a, struct node *b)
+{
+  struct node *new = NULL;
+  struct node *aCur, *bCur = NULL;
+  aCur = a;
+  bCur = b;
+  while (!(aCur == NULL && bCur == NULL))
+  {
+    if (bCur == NULL)
+      moveNode(&new, &aCur);
+    else if (aCur == NULL)
+      moveNode(&new, &bCur);
+    else if ((aCur->data) <= (bCur->data))
+      moveNode(&new, &aCur);
+    else
+      moveNode(&new, &bCur);
+  }
+
+  return new;
+}
+
+void mergeSort(struct node *head)
+{
+  
+}
+
+>>>>>>> 1619da718023f87bc1915d580b1a210ef25e1b37
 int main()
 {
   struct node *a = NULL;
   struct node *b = NULL;
   a = buildOneTwoThree();
   b = buildOneTwoThree();
+<<<<<<< HEAD
   //moveNode(&a, &b);
   print(a);
   print(b);
 
   print(sortedIntersect(a, b));
+=======
+  moveNode(&a, &b);
+  print(a);
+  print(b);
+
+  print(sortedMerge(a, b));
+>>>>>>> 1619da718023f87bc1915d580b1a210ef25e1b37
 }
