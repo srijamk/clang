@@ -2,16 +2,14 @@
 #include <stdlib.h>
 
 int compare(const void *a, const void *b) {
-    a = (int *) a;
-    b = (int *) b;
-
-    return a - b;
+    return ( *(int *)a - *(int *)b);
 }
 
 int main() {
     int n, cur;
+    cur = 0;
     scanf("%d", &n);
-    int nums = {0};
+    int nums[n];
 
 
     for (int i = 0; i < n; i++) {
@@ -21,13 +19,8 @@ int main() {
     qsort(nums, n, sizeof(int), compare);
 
     for (int i = 0; i < n; i++) {
-        printf("%d\n", nums[i]);
-    }
-
-    for (int i = 0; i < n; i++) {
         if (nums[i] >= cur + 1) {
             cur++;
-            printf("%d %d\n", nums[i], cur);
         }
     }
 
