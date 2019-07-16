@@ -321,6 +321,25 @@ void reverse(struct node** headPtr) {
     return;
 }
 
+void recursiveReverse(struct node** headPtr) {
+    if (*headPtr == NULL) return;
+
+    struct node* first;
+    struct node* rem;
+
+    first = *headPtr;
+    rem = first -> next;
+
+    if (rem == NULL) return;
+
+    recursiveReverse(&rem);
+
+    first -> next -> next = first;
+    first -> next = NULL;
+
+    *headPtr = rem;
+}
+
 int main()
 {
   struct node *a = NULL;
@@ -329,7 +348,7 @@ int main()
   b = buildOneTwoThree();
   
   append(&a, &b);
-  reverse(&a);
+  recursiveReverse(&a);
   print(a);
 
 }
