@@ -1,5 +1,19 @@
 #include <stdio.h>
 
+int solve(int amt, int coins[], int n) {
+    int dp[n + 1];
+    dp[0] = 0;
+    for (int i = 1; i <= n; i++) {
+        int cur = 0;
+        while (cur < n && coins[cur] <= i) {
+            if (coins[cur] == i) dp[i] += 1;
+            dp[i] += dp[i - coins[cur]];
+            cur++;
+        }
+    }
+    return dp[n];
+}
+
 int main() {
     int amt, n, i, j;
     scanf("%d %d", &amt, &n);
@@ -9,14 +23,6 @@ int main() {
         scanf("%d", &coins[i]);
     }
 
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < amt + 1; j++) {
-            if (j == 0) dp[i][j] = 0;
-            else if (coins[i] > j) dp[i][j] = (i == 0) ? 0 : dp[i - 1][j];
-            else if (coins[i] == j) dp[i][j] = (i == 0) ? 1 : dp[i - 1][j] + 1;
-            else dp[i][j] = (i == 0) ? dp[i][j - coins[i]] : dp[i - 1][j] + dp[i][j - coins[i]];
-        }
-    }
+    printf("%d\n", solve(amt, coins, n));
 
-    printf("%d\n", dp[i-1][j-1]);
 }
