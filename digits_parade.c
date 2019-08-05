@@ -34,6 +34,8 @@ int main() {
     newFind[j++] = ' ';
     newFind[j++] = '$';
 
+    
+
     printf("%s %s\n", find, newFind);
 
 

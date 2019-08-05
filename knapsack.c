@@ -1,51 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
-#define NMAX    111
-#define WMAX    1111111111
+#define NMAX    110
+#define WMAX    100010
+#define MAX     UINT_MAX
 
-long max(long x, long y) {
-    return (x > y) ? x : y;
+long long dp[NMAX][WMAX];
+
+long long min(long long x, long long y) {
+    return (x < y) ? x : y;
 }
-
+     
 int main() {
-    int i, j;
-    long n, w, weight, val;
-    scanf("%ld %ld", &n, &w);
-    long weights[n], values[n];
 
-    static long dp[NMAX][WMAX] = {0};
-
-    for (int i = 0; i < n; i++) {
-        scanf("%ld %ld", &weights[i], &values[i]);
-
-    }
-
-
-    getchar();
-
+    long long i, j, n, w;
+    scanf("%lld %lld", &n, &w);
+    long long weights[n], values[n];
+    
     for (i = 0; i < n; i++) {
-        for (j = 0; j <= w; j++) {
-            if (i == 0 && j == 0) dp[i][j] = 0;
-            else if (i == 0) {
-                //printf("%ld\n", values[i]);
-                if (j >= weights[i]) dp[i][j] = values[i];
-                //printf("%ld\n", dp[i][j]);
-            } else {
-                if (j < weights[i] && j == 0) dp[i][j] = dp[i - 1][j];
-                else if (j < weights[i]) dp[i][j] = dp[i - 1][j];
-                else if (j == weights[i]) {
+        scanf("%lld %lld", &weights[i], &values[i]);
+     
+    }
+     
+    for (i = 0; i < NMAX; i++) {
+        for (j = 0; j < WMAX; j++) {
+            dp[i][j] = MAX;
+        }
+    }
+    
+    dp[0][0] = 0;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < WMAX; j++) {
+            if (j >= values[i]) dp[i + 1][j] = min(dp[i][j], dp[i][j - values[i]] + weights[i]);
+            else dp[i + 1][j] = dp[i][j];
+        }
+    }
+     
+    for (int i = WMAX - 1; i >= 0; i--) {
 
-                    dp[i][j] = max(dp[i - 1][j], values[i]);
-                }
-                else if (j > weights[i]) {
-                    dp[i][j] = max(max(dp[i - 1][j - weights[i]] + values[i], dp[i - 1][j]), dp[i][j - 1]);
+        if (dp[n][i] <= w) {
+            printf("%d\n", i);
 
-                }
-            }
+            return 0;
         }
     }
 
-    printf("%ld\n", dp[i - 1][j - 1]);
-
+    return 0;
 }
