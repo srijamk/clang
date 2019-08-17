@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX     111111
-int arr[MAX];
+#define MAX     10000000
+long long arr[MAX];
 
-int comparator (const void *a, const void *b) {
-    int x = *(int *) a;
-    int y = *(int *) b;
-    return x - y;
+int compare (const void * a, const void * b)
+{
+    if (*(long long int *) a - *(long long int *) b < 0)
+        return -1;
+    if (* (long long int *) a - *(long long int *) b > 0)
+        return 1;
+
+    return 0;
 }
 
 int main() {
@@ -16,24 +20,34 @@ int main() {
     scanf("%d %d", &n, &k);
 
     for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
+        scanf("%lld", &arr[i]);
+
     }
     
-    qsort(arr, n, sizeof(int), comparator);
+    qsort(arr, n, sizeof(long long), compare);
 
-    for (int i = 1; i <= k; i++) {
-        for (int j = n / 2; j < n; j++) {
-            if (j == n - 1 || arr[j] < arr[j + 1]) {
-                arr[j]++;
+
+    int index = n / 2;
+    long long num = arr[index];
+    int numInc = 1;
+    long long inc = arr[index + 1] - arr[index];
+
+    if (inc > k) {
+        printf("%lld\n", num + k);
+    } else {
+
+        while (inc <= k) {
+            if (index == n - 1) {
+                num += (k / numInc);
                 break;
             }
+            inc += numInc * (arr[index + 1] - num);
+            num = arr[index + 1];
+            numInc++;
+            index++;
         }
+
+        printf("%lld\n", num);
     }
 
-    printf("%d\n", arr[n / 2]);
-
-    //for (int i = 0; i < n; i++) {
-    //    printf("%d ", arr[i]);
-    //}
-    //putchar('\n');
 }

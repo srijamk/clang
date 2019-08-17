@@ -10,6 +10,12 @@ struct node
   struct node *next;
 };
 
+struct node* createNode(int value) {
+    struct node *new = (struct node *) malloc(sizeof(struct node));
+    new -> data = value;
+    new -> next = NULL;
+}
+
 int length(struct node *head)
 {
   struct node *cur = head;
@@ -321,6 +327,20 @@ void reverse(struct node** headPtr) {
     return;
 }
 
+int containsCycle(struct node* head) {
+    struct node* fast = head;
+    struct node* slow = head;
+
+    while (fast != NULL && (fast -> next) != NULL) {
+        slow = slow -> next;
+        fast = (fast -> next) -> next;
+
+        if ((fast -> data) == (slow -> data)) return 1;
+    }
+
+    return 0;
+}
+
 void recursiveReverse(struct node** headPtr) {
     if (*headPtr == NULL) return;
 
@@ -342,13 +362,10 @@ void recursiveReverse(struct node** headPtr) {
 
 int main()
 {
-  struct node *a = NULL;
-  struct node *b = NULL;
-  a = buildOneTwoThree();
-  b = buildOneTwoThree();
-  
-  append(&a, &b);
-  recursiveReverse(&a);
-  print(a);
+  struct node *a = createNode(1);
+  struct node *b = createNode(2);
+  a -> next = b;
+  b -> next = a;
 
+  printf("%d\n", containsCycle(a));
 }
